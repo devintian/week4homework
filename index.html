@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>week4homework</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="assets/css/script.css">
+</head>
+<body>
+    <div class="head">
+        <button>View highscore</button>
+        <div class="head-time">Time : <span id="timer">0</span></div>
+    </div>
+    
+    <div class="card text-center" id="main">       
+        <div class="card-body">
+            <h5 class="card-title">Coding Quiz Challenge</h5>
+            <p class="card-text">Try to answer the following code-related question within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
+            <div class="form-row align-items-center">
+                <div class="col-auto my-1">
+                    <select class="custom-select mr-sm-2" id="CustomSelect">
+                        <option selected>Choose...</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                    <button class="btn btn-primary" id="startquiz">Start Quiz</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card text-center" id="question-page">       
+        <div class="card-body">
+            <h5 class="card-title">Coding Quiz Challenge</h5>
+            <div class="card-text question" id="question">Try to answer the following code-related question within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</div>
+            <div class="container">
+                <div class="row option" id="option">
+                    <button type="button" class="btn btn-secondary option-button" id="selection1">Secondary</button>      
+                    <button type="button" class="btn btn-secondary option-button" id="selection2">Secondary</button>                     
+                    <button type="button" class="btn btn-secondary option-button" id="selection3">Secondary</button>                     
+                    <button type="button" class="btn btn-secondary option-button" id="selection4">Secondary</button>                          
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" id="submit">       
+        <div class="card-body">
+            <h5 class="card-title">Coding Quiz Challenge</h5>
+            <p class="card-text">Your score is : <span id="your-score">0</span></p>
+            <div class="submit-content">
+                <div>Your name : </div> 
+                <input type="text" class="form-control" id="InputName" placeholder="Jane Doe">
+                <button class="btn btn-primary" id="submitbutton">Submit</button>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="card text-center" id ="score">       
+        <div class="card-body">
+            <h5 class="card-title">View Highest Score</h5>
+            <p class="card-text"></p>
+            <ol id="scorelist">
+                
+            </ol>
+            <button class="btn btn-primary" id="goback">Go back</button>
+            <button class="btn btn-primary" id="clear">Clear</button>
+
+        </div>
+    </div>
+    <script type="text/javascript" src="assets/js/quizset.js"></script>
+    <script type="text/javascript" src="assets/js/main.js"></script>
+    
+    
+</body>
+</html>

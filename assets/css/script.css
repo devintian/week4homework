@@ -1,0 +1,43 @@
+.head-time{
+    float: right;
+    padding-right: 20px;
+}
+
+.card{
+    margin: 100px 10%;
+}
+
+.form-row{
+    flex-direction: row;
+    justify-content: center;
+}
+#main .btn{
+    margin-top: 20px;
+}
+.form-control{
+    width: auto;
+    margin: 0 10px;
+}
+.submit-content{
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.question{
+    margin: 10px 15%;
+}
+
+
+.option{
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 10px 15%;
+}
+
+.option-button{
+    margin: 5px 0;
+}
+#score .btn{
+    margin-right: 10px;
+}
