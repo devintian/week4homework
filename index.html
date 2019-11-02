@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="head">
-        <button>View highscore</button>
+        <button id="highs">View highscore</button>
         <div class="head-time">Time : <span id="timer">0</span></div>
     </div>
     
@@ -36,13 +36,15 @@
         <div class="card-body">
             <h5 class="card-title">Coding Quiz Challenge</h5>
             <div class="card-text question" id="question">Try to answer the following code-related question within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</div>
-            <div class="container">
-                <div class="row option" id="option">
-                    <button type="button" class="btn btn-secondary option-button" id="selection1">Secondary</button>      
-                    <button type="button" class="btn btn-secondary option-button" id="selection2">Secondary</button>                     
-                    <button type="button" class="btn btn-secondary option-button" id="selection3">Secondary</button>                     
-                    <button type="button" class="btn btn-secondary option-button" id="selection4">Secondary</button>                          
-            </div>
+                <div class="container">
+                    <div class="row option" id="option">
+                        <button type="button" class="btn btn-secondary option-button" id="selection1">Secondary</button>      
+                        <button type="button" class="btn btn-secondary option-button" id="selection2">Secondary</button>                     
+                        <button type="button" class="btn btn-secondary option-button" id="selection3">Secondary</button>                     
+                        <button type="button" class="btn btn-secondary option-button" id="selection4">Secondary</button>                          
+                </div>
+                <br>
+                <div id="info"></div>
             </div>
         </div>
     </div>
@@ -56,6 +58,7 @@
                 <input type="text" class="form-control" id="InputName" placeholder="Jane Doe">
                 <button class="btn btn-primary" id="submitbutton">Submit</button>
             </div>
+            
             
         </div>
     </div>

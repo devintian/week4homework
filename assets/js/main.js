@@ -22,34 +22,57 @@ var submitbutton= document.getElementById("submitbutton");
 var scorelist = document.getElementById("scorelist");
 var goback = document.getElementById("goback");
 var clear = document.getElementById("clear");
+var highs = document.getElementById("highs");
 
 var score = 0;
 var timercount = 50;
 var questionindex = 0;
-
+var testName = [];
+var testscore = [];
 
 // main process
 
 //initial page
 init();
 startquiz.addEventListener("click", function(){
-    
+    countdown();
     questionpage();
     display(0);
-
 });
 
 option.addEventListener("click", function(event){
     console.log(event.target);
     console.log(event.target.id);
     // var X = event.target.id;
-
-    var y = selection(event.target.id);
-    validate(y);
-  
+    
+    if(event.target.id !== "option" && questionindex<5){
+        validate(selection(event.target.id));  
+    }
+      
 });
 
 
+submitbutton.addEventListener("click", function(){
+    localStorage.setItem(testName,InputName.value);
+    localStorage.setItem("score",yourscore.textContent);
+    var li = document.createElement("li");
+    li.textContent = InputName.value +"   "+ yourscore.textContent;
+    scorelist.appendChild(li);
+    init();
+});
+
+
+highs.addEventListener("click", function(){
+    highscorepage();
+});
+
+goback.addEventListener("click", function(){
+    init();
+});
+
+clear.addEventListener("click", function(){
+
+});
 
 
 
@@ -72,6 +95,26 @@ function questionpage(){
     
 }
 
+function submitpage(){
+    mainPage.style.display= "none";
+    questionPage.style.display = "none";
+    submitPage.style.display = "block";
+    scorePage.style.display = "none"; 
+    timer.textContent = 0;
+}
+
+function highscorepage(){
+    mainPage.style.display= "none";
+    questionPage.style.display = "none";
+    submitPage.style.display = "none";
+    scorePage.style.display = "block"; 
+    timer.textContent = 0;
+}
+
+
+function clearlist(){
+
+}
 
 
 function getquizset(){
@@ -118,21 +161,81 @@ function selection(X){
 
 
 function validate(X){
-    if(X ===getquizset().answer(questionindex)){
-        questionindex ++;
-        display(questionindex);
-        score++;      
+    if(questionindex<4 && timercount>10){
+        if(X ===getquizset().answer(questionindex)){
+            questionindex++;
+            display(questionindex);
+            score++;      
+        }
+        else{
+            questionindex++;
+            display(questionindex);
+            timercount -= 10;
+        }
     }
-    else{
-        questionindex ++;
-        display(questionindex);
-        timercount -= 10;
+    else if(timercount<10 &&questionindex<4){
+        if(X ===getquizset().answer(questionindex)){
+            score++;
+            questionindex++;
+            display(questionindex);
+                 
+        }
+        else{
+            timercount = 0;
+            finalscore();
+            submitpage();    
+        }
+      
     }
+    else if (timercount<10 && questionindex>=4){
+        if(X ===getquizset().answer(questionindex)){
+            score++;
+            questionindex++;
+            finalscore();
+            submitpage();
+
+        }
+        else{
+            timercount=0;
+            finalscore();
+            submitpage();
+        }
+    }
+    else if (timercount>10 && questionindex>=4){
+        if(X ===getquizset().answer(questionindex)){
+            score++;
+            questionindex++;
+            finalscore();
+            submitpage();
+
+        }
+        else{
+            timercount -= 10;
+            finalscore();
+            submitpage();
+        }
+    }
+    
 }
 
 
+function finalscore (){
+    var N = score + timercount;
+    yourscore.textContent = N;
+}
 
-
+function countdown() {
+    timer.textContent = timercount;
+    setInterval(() => {
+        if(timercount>0 && questionindex<5){
+            timer.textContent = timercount-1;
+            timercount--;
+        }
+        else{
+            timer.textContent = 0;
+        }      
+    }, 1000);   
+}
 
 
 
