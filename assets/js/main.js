@@ -17,7 +17,7 @@ var selection4 = document.getElementById("selection4");
 var option = document.getElementById("option")
 
 var yourscore = document.getElementById("your-score");
-var InputName = document.getElementById("InputName");
+var inputName = document.getElementById("InputName");
 var submitbutton= document.getElementById("submitbutton");
 var scorelist = document.getElementById("scorelist");
 var goback = document.getElementById("goback");
@@ -35,8 +35,8 @@ var testscore = [];
 //initial page
 init();
 startquiz.addEventListener("click", function(){
-    countdown();
     questionpage();
+    countdown();
     display(0);
 });
 
@@ -46,36 +46,29 @@ option.addEventListener("click", function(event){
     // var X = event.target.id;
     
     if(event.target.id !== "option" && questionindex<5){
-        validate(selection(event.target.id));  
+        validate(selection(event.target.id)); 
     }
       
 });
 
+var nameList = {};
+var scoreList = {};
 
-submitbutton.addEventListener("click", function(){
-    localStorage.setItem(testName,InputName.value);
-    localStorage.setItem("score",yourscore.textContent);
-    var li = document.createElement("li");
-    li.textContent = InputName.value +"   "+ yourscore.textContent;
-    scorelist.appendChild(li);
-    init();
-});
+submitbutton.addEventListener("click", submitScore);
 
 
 highs.addEventListener("click", function(){
     highscorepage();
+    displayscore();
 });
 
 goback.addEventListener("click", function(){
-    init();
+   window.location.reload();
 });
 
 clear.addEventListener("click", function(){
-
+    clearlist();
 });
-
-
-
 
 //function
 function init(){
@@ -86,13 +79,14 @@ function init(){
 }
 
 function questionpage(){
+    questionindex = 0;
+    timercount=50;
     if(getquizset()!==false){
         mainPage.style.display= "none";
         questionPage.style.display = "block";
         submitPage.style.display = "none";
         scorePage.style.display = "none"; 
-    }
-    
+    } 
 }
 
 function submitpage(){
@@ -109,13 +103,46 @@ function highscorepage(){
     submitPage.style.display = "none";
     scorePage.style.display = "block"; 
     timer.textContent = 0;
-}
 
+}
+function displayscore(){
+    var nameGet = JSON.parse(localStorage.getItem("name"));
+    var scoreGet = JSON.parse(localStorage.getItem("score"));
+    var lis = document.getElementsByTagName("li").length;
+
+    scorelist.innerHTML = '';
+
+    if(nameGet !== null){
+        for(var i = 0; i<nameGet.length; i++){
+        var nameli = document.createElement("li");
+        nameli.textContent = nameGet[i]+' '+scoreGet[i];
+        scorelist.appendChild(nameli);
+        }
+    }
+}
 
 function clearlist(){
-
+    localStorage.clear();
+    scorelist.innerHTML = "";
 }
 
+function submitScore(){
+    var nameGet = JSON.parse(localStorage.getItem("name"));
+    var scoreGet = JSON.parse(localStorage.getItem("score"));
+    if(nameGet !== null){
+     var length = nameGet.length;
+     nameGet[length] = inputName.value.trim();
+     scoreGet[length] = yourscore.textContent;
+    }else{
+     nameGet = [];
+     scoreGet = [];
+     nameGet[0] = inputName.value.trim();
+     scoreGet[0] = yourscore.textContent;  
+    }
+    localStorage.setItem("name",JSON.stringify(nameGet));
+    localStorage.setItem("score",JSON.stringify(scoreGet));
+    inputName.value = "";
+   }
 
 function getquizset(){
     var N = CustomSelect.value;
@@ -225,10 +252,10 @@ function finalscore (){
 }
 
 function countdown() {
-    timer.textContent = timercount;
+    
     setInterval(() => {
         if(timercount>0 && questionindex<5){
-            timer.textContent = timercount-1;
+            timer.textContent = timercount;
             timercount--;
         }
         else{
@@ -236,14 +263,3 @@ function countdown() {
         }      
     }, 1000);   
 }
-
-
-
-
-
-
-
-
-
-
-
