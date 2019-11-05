@@ -142,6 +142,7 @@ function submitScore(){
     localStorage.setItem("name",JSON.stringify(nameGet));
     localStorage.setItem("score",JSON.stringify(scoreGet));
     inputName.value = "";
+    window.location.reload();
    }
 
 function getquizset(){
